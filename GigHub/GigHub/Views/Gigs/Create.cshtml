@@ -6,7 +6,8 @@
 }
 <h2>Add a Gig</h2>
 
-<form>
+@using(Html.BeginForm("Create", "Gigs"))
+{
     <div class="form-group">
         @Html.LabelFor(m => m.Venue)
         @Html.TextBoxFor(m => m.Venue, new { @class = "form-control" })
@@ -22,13 +23,10 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Genre)
         @Html.DropDownListFor(m => m.Genre,
-                                new SelectList(Model.Genres,
-                                                nameof(GigHub.Models.Genre.Id),
-                                                nameof(GigHub.Models.Genre.Name)),
-                                string.Empty, new { @class = "form-control" })
+                                    new SelectList(Model.Genres,
+                                                    nameof(GigHub.Models.Genre.Id),
+                                                    nameof(GigHub.Models.Genre.Name)),
+                                    string.Empty, new { @class = "form-control" })
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
-</form>
-
-
-
+}
