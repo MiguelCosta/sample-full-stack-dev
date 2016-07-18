@@ -11,14 +11,17 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Venue)
         @Html.TextBoxFor(m => m.Venue, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Venue)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Date)
         @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Date)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Time)
         @Html.TextBoxFor(m => m.Time, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Time)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Genre)
@@ -27,6 +30,11 @@
                                                     nameof(GigHub.Models.Genre.Id),
                                                     nameof(GigHub.Models.Genre.Name)),
                                     string.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Genre)
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
 }
