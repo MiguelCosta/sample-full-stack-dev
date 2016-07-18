@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201606260213436_PopulateGenresTable.Designer.cs">
       <DependentUpon>201606260213436_PopulateGenresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607182155001_AddFkPropertiesToGig.cs" />
+    <Compile Include="Migrations\201607182155001_AddFkPropertiesToGig.Designer.cs">
+      <DependentUpon>201607182155001_AddFkPropertiesToGig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -292,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606260213436_PopulateGenresTable.resx">
       <DependentUpon>201606260213436_PopulateGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607182155001_AddFkPropertiesToGig.resx">
+      <DependentUpon>201607182155001_AddFkPropertiesToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
