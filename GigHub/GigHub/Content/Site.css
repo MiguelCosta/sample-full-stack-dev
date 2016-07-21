@@ -18,6 +18,11 @@ textarea {
     max-width: 280px;
 }
 
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+
 /* Bootstrap Overrides */
 .navbar-inverse {
     background-color: #ff4342;
@@ -33,7 +38,8 @@ textarea {
     }
 
     .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-        background-color: rgba(205, 40, 39, 0.55);
+        background-color: rgb(230, 71, 70);
+        background-color: rgba(205, 40, 39, 0.5);
     }
 
 .navbar-brand {
@@ -57,6 +63,7 @@ body {
 
 .form-control {
     font-size: 17px;
+    height: 40px;
     /*padding: 20px 15px;*/
     border-radius: 9px;
 }
