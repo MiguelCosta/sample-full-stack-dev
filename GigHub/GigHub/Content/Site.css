@@ -1,5 +1,4 @@
-﻿
-/* Set padding to keep content from hitting the edges */
+﻿/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -33,6 +32,18 @@ textarea {
         color: #fff;
     }
 
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        background-color: rgba(205, 40, 39, 0.55);
+    }
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.dropdown-menu {
+    box-shadow: none;
+}
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -46,7 +57,7 @@ body {
 
 .form-control {
     font-size: 17px;
-    padding: 20px 15px;
+    /*padding: 20px 15px;*/
     border-radius: 9px;
 }
 
