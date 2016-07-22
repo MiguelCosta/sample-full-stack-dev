@@ -195,8 +195,11 @@
     <Compile Include="Migrations\201607182155001_AddFkPropertiesToGig.Designer.cs">
       <DependentUpon>201607182155001_AddFkPropertiesToGig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607222132439_AddNameToApplicationUser.cs" />
+    <Compile Include="Migrations\201607222132439_AddNameToApplicationUser.Designer.cs">
+      <DependentUpon>201607222132439_AddNameToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -204,9 +207,18 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
     <Compile Include="ViewModels\GigFormViewModel.cs" />
+    <Compile Include="ViewModels\VerifyCodeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -301,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607182155001_AddFkPropertiesToGig.resx">
       <DependentUpon>201607182155001_AddFkPropertiesToGig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607222132439_AddNameToApplicationUser.resx">
+      <DependentUpon>201607222132439_AddNameToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
