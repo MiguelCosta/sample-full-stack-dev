@@ -119,12 +119,12 @@ body {
             left: 70px;
         }
 
-        .gigs > li .details .artist{
-            font-weight: bold;
-            display: block;
-        }
+            .gigs > li .details .artist {
+                font-weight: bold;
+                display: block;
+            }
 
-        .gigs > li .details .genre{
-            font-size: 15px;
-            display: block;
-        }
+            .gigs > li .details .genre {
+                font-size: 15px;
+                display: block;
+            }
