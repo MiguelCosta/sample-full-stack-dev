@@ -30,10 +30,11 @@ namespace GigHub.Controllers
             var viewModel = new GigsViewModel
             {
                 ShowActions = true,
-                Gigs = gigs
+                Gigs = gigs,
+                Heading = "Gigs I'm attending"
             };
 
-            return View(viewModel);
+            return View("Gigs", viewModel);
         }
 
         [Authorize]
