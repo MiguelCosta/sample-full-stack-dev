@@ -89,7 +89,6 @@ body {
 .form-control {
     font-size: 17px;
     height: 40px;
-    /*padding: 20px 15px;*/
     border-radius: 9px;
 }
 
@@ -151,3 +150,12 @@ body {
             .gigs > li .details .genre {
                 font-size: 15px;
             }
+
+        .gigs > li .actions {
+            font-size: 15px;
+            display: none;
+        }
+
+        .gigs > li:hover .actions {
+            display: block;
+        }
