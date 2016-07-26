@@ -27,9 +27,53 @@
                 <div class="actions">
                     <a href="@Url.Action("Edit", "Gigs", new { id = g.Id })">
                         Edit
+                    </a> |
+                    <a href="#" class="js-cancel-gig" data-gig-id="@g.Id">
+                        Cancel
                     </a>
                 </div>
             </div>
         </li>
     }
 </ul>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".js-cancel-gig").click(function (e) {
+                var link = $(e.target);
+                var gigId = link.attr("data-gig-id");
+
+                bootbox.dialog({
+                    message: "Are you sure you want to cancel this gig?",
+                    title: "Confirm",
+                    buttons: {
+                        no: {
+                            label: "No",
+                            className: "btn btn-default",
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: "Yes",
+                            className: "btn-danger",
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/gigs/" + gigId,
+                                    method: "DELETE"
+                                }).done(function () {
+                                    link.parents("li").fadeOut(function () {
+                                        $(this).remove();
+                                    });
+                                }).fail(function () {
+                                    alert("Fail");
+                                });
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

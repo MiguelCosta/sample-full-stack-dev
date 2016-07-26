@@ -19,6 +19,8 @@ namespace GigHub.Models
 
         public int Id { get; set; }
 
+        public bool IsCanceled { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Venue { get; set; }

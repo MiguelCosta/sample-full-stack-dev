@@ -182,9 +182,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\Api\GigsController.cs" />
+    <Compile Include="Controllers\Api\AttendancesController.cs" />
     <Compile Include="Controllers\FolloweesController.cs" />
-    <Compile Include="Controllers\FollowingsController.cs" />
+    <Compile Include="Controllers\Api\FollowingsController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -224,6 +225,10 @@
     <Compile Include="Migrations\201607231505355_AddFollowing.cs" />
     <Compile Include="Migrations\201607231505355_AddFollowing.Designer.cs">
       <DependentUpon>201607231505355_AddFollowing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607262259170_AddIsCanceledToGig.cs" />
+    <Compile Include="Migrations\201607262259170_AddIsCanceledToGig.Designer.cs">
+      <DependentUpon>201607262259170_AddIsCanceledToGig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -267,6 +272,8 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
@@ -352,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607231505355_AddFollowing.resx">
       <DependentUpon>201607231505355_AddFollowing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607262259170_AddIsCanceledToGig.resx">
+      <DependentUpon>201607262259170_AddIsCanceledToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
