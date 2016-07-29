@@ -1,8 +1,11 @@
 # [Pluralsight] Become a Full-stack .NET Developer
 
 https://app.pluralsight.com/library/courses/full-stack-dot-net-developer-fundamentals
+https://app.pluralsight.com/library/courses/full-stack-dot-net-developer
 
 ## Table Of Contents
+
+### Fundamentals 
 
 1. Course Overview
 1. Course Introduction
@@ -19,6 +22,20 @@ https://app.pluralsight.com/library/courses/full-stack-dot-net-developer-fundame
 1. Creating Beautiful and Precise Designs with CSS
 1. Implementing a Use Case from Top to Bottom
 1. Implementing Secondary Use Cases
+
+### Advanced Topics
+
+1. Course Overview
+1. Basic CRUD: Implementing the Read
+1. Basic CRUD: Implementing the Update
+1. Basic CRUD: Implementing the Delete
+1. Avoiding Pitfalls in Domain Models
+1. Refactoring Towards an Object-oriented Design
+1. Mapping Domain Objects to DTOs
+1. Working with Bootstrap Icons, Badges, and Popovers
+1. Improving the Look and Feel
+1. Handling Bootstrap Events
+1. Implementing Searching
 
 ## GigHub
 
