@@ -1,11 +1,8 @@
 # [Pluralsight] Become a Full-stack .NET Developer
 
-https://app.pluralsight.com/library/courses/full-stack-dot-net-developer-fundamentals
-https://app.pluralsight.com/library/courses/full-stack-dot-net-developer
-
 ## Table Of Contents
 
-### Fundamentals 
+### [Fundamentals](https://app.pluralsight.com/library/courses/full-stack-dot-net-developer-fundamentals) 
 
 1. Course Overview
 1. Course Introduction
@@ -23,7 +20,7 @@ https://app.pluralsight.com/library/courses/full-stack-dot-net-developer
 1. Implementing a Use Case from Top to Bottom
 1. Implementing Secondary Use Cases
 
-### Advanced Topics
+### [Advanced Topics](https://app.pluralsight.com/library/courses/full-stack-dot-net-developer)
 
 1. Course Overview
 1. Basic CRUD: Implementing the Read
@@ -76,3 +73,7 @@ Additionally, users should be able to follow their favorite artists. When they f
 - Who I’m following
 - Gig feed
 
+#### Notification
+- When gig is canceled
+- When gig is updated
+- When gig is listed 
