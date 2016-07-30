@@ -62,6 +62,17 @@ textarea {
         color: #fff;
     }
 
+    .navbar-inverse .notifications {
+        position: relative;
+    }
+
+        .navbar-inverse .notifications .badge {
+            position: absolute;
+            top: 8px;
+            right: -1px;
+            background: #a80a0a;
+        }
+
     .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
         background-color: rgb(230, 71, 70);
         background-color: rgba(205, 40, 39, 0.5);

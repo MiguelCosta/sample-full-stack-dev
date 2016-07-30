@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @*<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700|Open+Sans:400,700" rel="stylesheet">*@
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     @Styles.Render("~/Content/css")
+    <link href="~/bower_components/animate.css/animate.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -39,5 +40,15 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.getJSON("/api/notifications", function (notifications) {
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide")
+                    .addClass("animated bounceInDown");
+            });
+        });
+    </script>
 </body>
 </html>
