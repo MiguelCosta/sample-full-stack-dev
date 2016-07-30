@@ -27,7 +27,7 @@ namespace GigHub.Controllers.Api
         {
             var user = User.Identity.GetUserId();
             var notifications = await _context.UserNotifications
-                .Where(un => un.UserId == user)
+                .Where(un => un.UserId == user && un.IsRead == false)
                 .Select(un => un.Notification)
                 .Include(n => n.Gig.Artist)
                 .Include(n => n.Gig.Genre)
