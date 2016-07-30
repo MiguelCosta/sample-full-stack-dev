@@ -49,7 +49,7 @@ namespace GigHub.Models
 
         public void Modify(DateTime newDateTime, string newVenue, byte genreId)
         {
-            var notification = Notification.GigUpdated(this, newDateTime, newVenue);
+            var notification = Notification.GigUpdated(this, DateTime, Venue);
 
             DateTime = newDateTime;
             Venue = newVenue;
