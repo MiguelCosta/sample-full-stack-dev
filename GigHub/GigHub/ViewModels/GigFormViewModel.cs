@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace GigHub.ViewModels
@@ -14,10 +15,10 @@ namespace GigHub.ViewModels
         {
             get
             {
-                Expression<Func<GigsController, ActionResult>> update =
+                Expression<Func<GigsController, Task<ActionResult>>> update =
                     (c => c.Update(this));
 
-                Expression<Func<GigsController, ActionResult>> create =
+                Expression<Func<GigsController, Task<ActionResult>>> create =
                     (c => c.Create(this));
 
                 var action = (Id != 0) ? update : create;
