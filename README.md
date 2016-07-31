@@ -34,6 +34,22 @@
 1. Handling Bootstrap Events
 1. Implementing Searching
 
+## Project dependencies
+
+### Nuget
+
+- AutoMapper
+- Bootbox.JS
+- bootstrap
+- EntityFramework
+- jQuery
+
+### Bower
+
+- animate.css 
+- moment
+- underscore
+
 ## GigHub
 
 ### Description

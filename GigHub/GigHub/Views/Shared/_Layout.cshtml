@@ -71,6 +71,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.getJSON("/api/notifications", function (notifications) {
+                // o ideal era aqui aparecer as notificações mais recentes apesar
+                // de não haver nenhuma nova
+                // para isso era preciso criar um Dto que tinha as propriedades:
+                // - numero de notificações novas
+                // - notificacoes
                 if (notifications.length == 0)
                     return;
 
@@ -89,6 +94,13 @@
                         var html = compiled({ notifications: notifications });
                         return html;
                     }
+                }).on('shown.bs.popover', function () {
+                    $.post("/api/notifications/markAsRead")
+                        .done(function () {
+                            $(".js-notifications-count")
+                                .text('')
+                                .addClass('hide');
+                        });
                 });
             });
         });
