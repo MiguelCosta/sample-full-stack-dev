@@ -114,6 +114,10 @@ body {
     border-radius: 9px;
 }
 
+.popover{
+    box-shadow: none;
+}
+
 /* Page-level styles */
 .gigs {
     list-style: none;
