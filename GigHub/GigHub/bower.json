@@ -1,7 +1,8 @@
 {
-    "name": "asp.net",
-    "private": true,
-    "dependencies": {
-        "animate.css": "3.5.1"
-    }
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "animate.css": "3.5.1",
+    "underscore": "1.8.3"
+  }
 }

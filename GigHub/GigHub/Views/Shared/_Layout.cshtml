@@ -40,13 +40,57 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/bower_components/underscore/underscore-min.js"></script>
+    <script type="text/x-template" id="notifications-template">
+        <ul>
+            <%
+            _.each(notifications, function(notification){
+                if(notification.type == 1){ %>
+                    <li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %>.</li>
+                <% }
+
+                    else if (notification.type == 2){
+                        var changes = [], originalValues = [], newValues = [];
+
+                        if(notification.originalVenue != notification.gig.venue){
+                            changes.push('venue');
+                            originalValues.push(notification.originalVenue);
+                            newValues.push(notification.gig.venue);
+                        }
+
+                        if(notification.originalDateTime != notification.gig.dateTime){
+                            changes.push('date/time');
+                            originalValues.push(notification.originalDateTime);
+                            newValues.push(notification.gig.dateTime);
+                        }%>
+                        <li><%= notification.gig.artist.name %> has changed the <%= changes.join(' and ' ) %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %>.</li>
+                    <% 
+                    }
+                }
+            )%>
+        </ul>
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $.getJSON("/api/notifications", function (notifications) {
+                if (notifications.length == 0)
+                    return;
+
                 $(".js-notifications-count")
                     .text(notifications.length)
                     .removeClass("hide")
                     .addClass("animated bounceInDown");
+
+                $(".notifications").popover({
+                    html: true,
+                    title: 'Notifications',
+                    placement: 'bottom',
+                    content: function () {
+                        var compiled = _.template($("#notifications-template").html());
+                        var html = compiled({ notifications: notifications });
+                        return html;
+                    }
+                });
             });
         });
     </script>
