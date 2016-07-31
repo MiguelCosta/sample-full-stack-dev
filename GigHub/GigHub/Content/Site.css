@@ -159,3 +159,6 @@ body {
 .popover-notifications ul.notifications .highlight {
   font-weight: bold;
 }
+#searchGigs {
+  width: 300px;
+}
