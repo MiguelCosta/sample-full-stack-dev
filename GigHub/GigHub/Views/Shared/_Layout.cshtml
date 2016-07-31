@@ -7,7 +7,6 @@
     @*<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700|Open+Sans:400,700" rel="stylesheet">*@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     @Styles.Render("~/Content/css")
-    <link href="~/bower_components/animate.css/animate.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,13 +39,13 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script src="~/bower_components/underscore/underscore-min.js"></script>
+
     <script type="text/x-template" id="notifications-template">
-        <ul>
+        <ul class="notifications">
             <%
             _.each(notifications, function(notification){
                 if(notification.type == 1){ %>
-                    <li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %>.</li>
+                    <li><span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.</li>
                 <% }
 
                     else if (notification.type == 2){
@@ -60,10 +59,10 @@
 
                         if(notification.originalDateTime != notification.gig.dateTime){
                             changes.push('date/time');
-                            originalValues.push(notification.originalDateTime);
-                            newValues.push(notification.gig.dateTime);
+                            originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
+                            newValues.push(moment(notification.gig.dateTime).format("D MMM HH:mm"));
                         }%>
-                        <li><%= notification.gig.artist.name %> has changed the <%= changes.join(' and ' ) %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %>.</li>
+                        <li><span class="highlight"><%= notification.gig.artist.name %></span> has changed the <%= changes.join(' and ' ) %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %>.</li>
                     <% 
                     }
                 }
@@ -85,6 +84,7 @@
                     html: true,
                     title: 'Notifications',
                     placement: 'bottom',
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
                         var compiled = _.template($("#notifications-template").html());
                         var html = compiled({ notifications: notifications });

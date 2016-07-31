@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "animate.css": "3.5.1",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "moment": "2.13.0"
   }
 }
