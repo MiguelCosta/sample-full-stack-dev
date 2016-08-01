@@ -72,7 +72,7 @@ namespace GigHub.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ViewModels.GigFormViewModel viewModel)
+        public async Task<ActionResult> Create(GigFormViewModel viewModel)
         {
             if(ModelState.IsValid == false)
             {
@@ -117,7 +117,7 @@ namespace GigHub.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(ViewModels.GigFormViewModel viewModel)
+        public async Task<ActionResult> Update(GigFormViewModel viewModel)
         {
             if(ModelState.IsValid == false)
             {
@@ -134,6 +134,35 @@ namespace GigHub.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Mine");
+        }
+
+        public async Task<ActionResult> Details(int id)
+        {
+            var gig = await _context.Gigs
+                .Include(g => g.Artist)
+                .SingleOrDefaultAsync(g => g.Id == id);
+
+            if(gig == null)
+                return HttpNotFound();
+
+            var viewModel = new GigDetailsViewModel
+            {
+                Gig = gig
+            };
+
+            if(User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+
+                viewModel.IsFollowing = await _context.Followings
+                    .AnyAsync(f => f.FollowerId == userId && f.FolloweeId == gig.ArtistId);
+
+                viewModel.IsGoing = await _context.Attendances
+                    .AnyAsync(a => a.GigId == gig.Id && a.AttendeeId == userId);
+
+            }
+
+            return View(viewModel);
         }
 
     }

@@ -21,7 +21,7 @@ namespace GigHub.Controllers.Api
         public async Task<IHttpActionResult> Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var exist = _context.Followings.Any(f => f.FollowerId == userId && f.FollowerId == dto.FolloweeId);
+            var exist = _context.Followings.Any(f => f.FolloweeId == userId && f.FollowerId == dto.FolloweeId);
 
             if(exist)
             {
