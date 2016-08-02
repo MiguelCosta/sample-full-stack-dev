@@ -60,33 +60,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // button Going click
-            $(".js-toggle-attendance").click(function (e) {
-                var button = $(e.target);
-                var gigDto = { gigId: button.attr("data-gig-id") };
-
-                if (button.hasClass('btn-default')) {
-
-                    $.post("/api/attendances", gigDto)
-                        .done(function () {
-                            button.removeClass("btn-default")
-                                  .addClass("btn-info")
-                                  .text("Going");
-                        }).fail(function () {
-                            alert("Fail");
-                        });
-                } else {
-                    $.ajax({
-                        url: '/api/attendances/' + gigDto.gigId,
-                        method: 'DELETE'
-                    }).done(function () {
-                        button.removeClass("btn-info")
-                                  .addClass("btn-default")
-                                  .text("Going?");
-                    }).fail(function () {
-                        alert("Fail");
-                    });
-                }
-            });
+            GigsController.init();
 
             // button Follow click
             $(".js-toggle-follow").click(function (e) {
