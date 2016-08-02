@@ -8,7 +8,7 @@
     @if(User.Identity.IsAuthenticated)
     {
 
-        @if(Model.IsFollowing)
+        if(Model.IsFollowing)
         {
             <button class="btn btn-info">Following</button>
         }
@@ -20,7 +20,7 @@
 </h2>
 
 <p>
-    Performing at @Model.Gig.ve  on @Model.Gig.DateTime.ToString("d MMM") at @Model.Gig.DateTime.ToString("HH:mm")
+    Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("d MMM") at @Model.Gig.DateTime.ToString("HH:mm")
 </p>
 
 @if(User.Identity.IsAuthenticated && Model.IsGoing)
