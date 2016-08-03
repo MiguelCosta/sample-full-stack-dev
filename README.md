@@ -34,6 +34,16 @@
 1. Handling Bootstrap Events
 1. Implementing Searching
 
+### [Architecture and Testing](https://app.pluralsight.com/library/courses/full-stack-dot-net-developer-architecture-testing)
+
+1. Implementing the Remaining Use Cases
+1. Modularizing JavaScript Code
+1. Refactoring Towards the Clean Architecture
+1. Programming Against Interfaces
+1. Testing Controllers
+1. Testing Repositories
+1. Adding Integration Tests
+
 ## Project dependencies
 
 ### Nuget
