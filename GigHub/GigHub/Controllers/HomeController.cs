@@ -1,25 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using GigHub.Models;
 using System.Data.Entity;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
+using GigHub.Repositories;
+using System.Threading.Tasks;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+
+        private readonly AttendanceRepository _attendanceRepository;
 
         public HomeController()
         {
-            _context = new Models.ApplicationDbContext();
+            _context = new ApplicationDbContext();
+            _attendanceRepository = new AttendanceRepository(_context);
         }
 
-        public ActionResult Index(string query = null)
+        public async Task<ActionResult> Index(string query = null)
         {
             var upcomingGigs = _context.Gigs
                 .Include(g => g.Artist)
@@ -36,15 +39,13 @@ namespace GigHub.Controllers
             }
 
             var userId = User.Identity.GetUserId();
-            var attendances =  _context.Attendances
-                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                .ToList()
+            var attendances = (await _attendanceRepository.GetFutureAttendances(userId))
                 .ToLookup(a => a.GigId);
 
             var viewModel = new GigsViewModel
             {
                 ShowActions = User.Identity.IsAuthenticated,
-                Gigs = upcomingGigs,
+                Gigs = await upcomingGigs.ToListAsync(),
                 Heading = "Upcoming Gigs",
                 SearchTerm = query,
                 Attendances = attendances
