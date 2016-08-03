@@ -35,11 +35,6 @@
                     {
                         <span class="label label-warning">Canceled</span>
                     }
-
-                    @if(Model.ShowActions)
-                    {
-                        <button data-user-id="@g.ArtistId" class="btn btn-link btn-sm js-toggle-follow">Follow</button>
-                    }
                 </span>
                 <span class="genre">
                     @g.Genre.Name
@@ -48,8 +43,8 @@
                 {
                     <button data-gig-id="@g.Id"
                             class="btn
-                                @(Model.Attendances.Contains(g.Id) ? "btn-info" : "btn-default") btn-sm pull-right js-toggle-attendance">
-                        Going?
+                                @(Model.Attendances.Contains(g.Id) ? "btn-info" : "btn-default") btn-sm js-toggle-attendance">
+                        @(Model.Attendances.Contains(g.Id) ? "Going" : "Going?")
                     </button>
                 }
             </div>
@@ -61,18 +56,6 @@
         $(document).ready(function () {
             // button Going click
             GigsController.init("#gigs");
-
-            // button Follow click
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                var followDto = { followeeId: button.attr("data-user-id") };
-                $.post("/api/followings", followDto)
-                    .done(function () {
-                        button.text("Following");
-                    }).fail(function () {
-                        alert("Fail");
-                    });
-            });
         });
     </script>
 }

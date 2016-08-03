@@ -295,8 +295,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\controllers\gigsDetailsController.js" />
     <Content Include="Scripts\app\controllers\gigsController.js" />
     <Content Include="Scripts\app\services\attendanceService.js" />
+    <Content Include="Scripts\app\services\followingService.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />

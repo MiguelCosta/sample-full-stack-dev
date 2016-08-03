@@ -1,6 +1,7 @@
 ﻿using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -21,7 +22,7 @@ namespace GigHub.Controllers.Api
         public async Task<IHttpActionResult> Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var exist = _context.Followings.Any(f => f.FolloweeId == userId && f.FollowerId == dto.FolloweeId);
+            var exist = await _context.Followings.AnyAsync(f => f.FollowerId == userId && f.FolloweeId == dto.FolloweeId);
 
             if(exist)
             {
@@ -38,5 +39,23 @@ namespace GigHub.Controllers.Api
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> Unfollow(string id)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var follow = await _context.Followings
+                .SingleOrDefaultAsync(f => f.FollowerId == userId && f.FolloweeId == id);
+
+            if(follow == null)
+                return NotFound();
+
+            _context.Followings.Remove(follow);
+            await _context.SaveChangesAsync();
+
+            return Ok(id);
+        }
+
     }
 }

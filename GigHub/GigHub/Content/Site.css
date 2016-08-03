@@ -99,10 +99,17 @@ body {
 /* Page-level styles */
 .gigs {
   list-style: none;
+  /*> li:hover .actions {
+        display: block;
+    }*/
 }
 .gigs > li {
   position: relative;
   margin-bottom: 30px;
+  /*.actions {
+            font-size: 15px;
+            display: none;
+        }*/
 }
 .gigs > li .date {
   background-color: red;
@@ -133,14 +140,9 @@ body {
   display: block;
 }
 .gigs > li .details .genre {
-  font-size: 15px;
-}
-.gigs > li .actions {
-  font-size: 15px;
-  display: none;
-}
-.gigs > li:hover .actions {
+  font-size: 14px;
   display: block;
+  margin-bottom: 4px;
 }
 .popover-notifications .popover-content {
   padding: 0;
