@@ -16,7 +16,7 @@
     </div>
 }
 
-<ul class="gigs voffset3">
+<ul id="gigs" class="gigs voffset3">
     @foreach(var g in Model.Gigs)
     {
         <li>
@@ -60,7 +60,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // button Going click
-            GigsController.init();
+            GigsController.init("#gigs");
 
             // button Follow click
             $(".js-toggle-follow").click(function (e) {
