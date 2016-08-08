@@ -16,10 +16,9 @@ namespace GigHub.Repositories
             _context = context;
         }
 
-        public async Task CreateGig(Gig gig)
+        public void Add(Gig gig)
         {
             _context.Gigs.Add(gig);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Gig> GetGig(int id)
