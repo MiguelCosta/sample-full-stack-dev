@@ -5,7 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using GigHub.Models;
+using GigHub.Core.Models;
+using GigHub.Persistence;
 
 namespace GigHub
 {

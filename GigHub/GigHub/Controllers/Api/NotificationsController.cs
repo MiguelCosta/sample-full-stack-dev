@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using GigHub.Dtos;
-using GigHub.Models;
+using GigHub.Core.Dtos;
+using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -53,6 +50,5 @@ namespace GigHub.Controllers.Api
 
             return Ok();
         }
-
     }
 }

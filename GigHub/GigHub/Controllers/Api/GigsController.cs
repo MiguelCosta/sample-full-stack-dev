@@ -1,6 +1,5 @@
-﻿using GigHub.Models;
+﻿using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;

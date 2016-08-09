@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using GigHub.Models;
+﻿using GigHub.Core;
 using Microsoft.AspNet.Identity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
     public class FolloweesController : Controller
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public FolloweesController()
+        public FolloweesController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Followees
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
-            var artists = _context.Followings
-                .Where(f => f.FollowerId == userId)
+            var artists = (await _unitOfWork.Followings.GetFollowings(userId))
                 .Select(f => f.Followee);
 
             return View(artists);

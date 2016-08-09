@@ -1,25 +1,39 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using GigHub.Models;
-using System.Data.Entity;
-using GigHub.ViewModels;
+﻿using GigHub.Core.Repositories;
+using GigHub.Core.ViewModels;
+using GigHub.Persistence;
+using GigHub.Persistence.Repositories;
 using Microsoft.AspNet.Identity;
-using GigHub.Repositories;
+using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAttendanceRepository _attendanceRepository;
         private readonly ApplicationDbContext _context;
-
-        private readonly AttendanceRepository _attendanceRepository;
 
         public HomeController()
         {
             _context = new ApplicationDbContext();
             _attendanceRepository = new AttendanceRepository(_context);
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
 
         public async Task<ActionResult> Index(string query = null)
@@ -51,20 +65,6 @@ namespace GigHub.Controllers
                 Attendances = attendances
             };
             return View("Gigs", viewModel);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

@@ -1,13 +1,8 @@
-﻿using GigHub.Models;
-using GigHub.Persistence;
-using GigHub.Repositories;
-using GigHub.ViewModels;
+﻿using GigHub.Core;
+using GigHub.Core.Models;
+using GigHub.Core.ViewModels;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -15,7 +10,6 @@ namespace GigHub.Controllers
 {
     public class GigsController : Controller
     {
-
         private readonly IUnitOfWork _unitOfWork;
 
         public GigsController(IUnitOfWork unitOfwork)
@@ -42,7 +36,7 @@ namespace GigHub.Controllers
         [Authorize]
         public async Task<ActionResult> Create()
         {
-            var viewModel = new ViewModels.GigFormViewModel
+            var viewModel = new GigFormViewModel
             {
                 Genres = await _unitOfWork.Genres.GetAll(),
                 Heading = "Add a Gig"
@@ -90,12 +84,11 @@ namespace GigHub.Controllers
             {
                 var userId = User.Identity.GetUserId();
 
-                viewModel.IsFollowing = 
+                viewModel.IsFollowing =
                     await _unitOfWork.Followings.GetFollowing(userId, gig.ArtistId) != null;
 
-                viewModel.IsGoing = 
+                viewModel.IsGoing =
                     await _unitOfWork.Attendances.GetAttendance(gig.Id, userId) != null;
-
             }
 
             return View(viewModel);
@@ -132,11 +125,13 @@ namespace GigHub.Controllers
 
             return View(gigs);
         }
+
         [HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
         {
             return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -162,6 +157,4 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine");
         }
     }
-
-
 }

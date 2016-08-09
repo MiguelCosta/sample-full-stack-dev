@@ -1,8 +1,8 @@
-﻿using GigHub.Dtos;
-using GigHub.Models;
+﻿using GigHub.Core.Dtos;
+using GigHub.Core.Models;
+using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -56,6 +56,5 @@ namespace GigHub.Controllers.Api
 
             return Ok(id);
         }
-
     }
 }
