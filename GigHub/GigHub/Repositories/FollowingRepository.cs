@@ -8,18 +8,13 @@ using System.Web;
 
 namespace GigHub.Repositories
 {
-    public class FollowingRepository
+    public class FollowingRepository : IFollowingRepository
     {
         private ApplicationDbContext _context;
 
         public FollowingRepository(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        public async Task<List<Genre>> GetAll()
-        {
-            return await _context.Genres.ToListAsync();
         }
 
         public Task<Following> GetFollowing(string followerId, string followeeId)

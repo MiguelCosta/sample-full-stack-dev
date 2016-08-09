@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GigHub.Persistence
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _context;
 
@@ -18,13 +18,13 @@ namespace GigHub.Persistence
             Gigs = new GigRepository(_context);
         }
 
-        public AttendanceRepository Attendances { get; set; }
+        public IAttendanceRepository Attendances { get; private set; }
 
-        public FollowingRepository Followings { get; private set; }
+        public IFollowingRepository Followings { get; private set; }
 
-        public GenreRepository Genres { get; set; }
+        public IGenreRepository Genres { get; private set; }
 
-        public GigRepository Gigs { get; private set; }
+        public IGigRepository Gigs { get; private set; }
 
         public async Task Complete()
         {

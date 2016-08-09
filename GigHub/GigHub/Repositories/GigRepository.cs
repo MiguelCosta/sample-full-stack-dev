@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GigHub.Repositories
 {
-    public class GigRepository
+    public class GigRepository : IGigRepository
     {
         private ApplicationDbContext _context;
 
