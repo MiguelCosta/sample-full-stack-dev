@@ -17,6 +17,11 @@ namespace GigHub.Persistence.Repositories
             _context = context;
         }
 
+        public void Add(Attendance attendance)
+        {
+            _context.Attendances.Add(attendance);
+        }
+
         public async Task<Attendance> GetAttendance(int gigId, string attendeeId)
         {
             return await _context.Attendances
@@ -28,6 +33,11 @@ namespace GigHub.Persistence.Repositories
             return await _context.Attendances
                             .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
                             .ToListAsync();
+        }
+
+        public void Remove(Attendance attendance)
+        {
+            _context.Attendances.Remove(attendance);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GigHub.Persistence;
+﻿using GigHub.Core;
+using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
@@ -10,20 +11,18 @@ namespace GigHub.Controllers.Api
     [Authorize]
     public class GigsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public GigsController()
+        public GigsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [HttpDelete]
         public async Task<IHttpActionResult> Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
-            var gig = await _context.Gigs
-                .Include(g => g.Attendances.Select(a => a.Attendee))
-                .SingleAsync(g => g.Id == id && g.ArtistId == userId);
+            var gig = await _unitOfWork.Gigs.GetGigWithAttendances(id);
 
             if(gig.IsCanceled)
             {
@@ -32,7 +31,7 @@ namespace GigHub.Controllers.Api
 
             gig.Cancel();
 
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             return Ok();
         }

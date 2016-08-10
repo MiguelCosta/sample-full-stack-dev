@@ -1,8 +1,7 @@
-﻿using GigHub.Core.Dtos;
+﻿using GigHub.Core;
+using GigHub.Core.Dtos;
 using GigHub.Core.Models;
-using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
-using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -11,22 +10,22 @@ namespace GigHub.Controllers.Api
     [Authorize]
     public class FollowingsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public FollowingsController()
+        public FollowingsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
         public async Task<IHttpActionResult> Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var exist = await _context.Followings.AnyAsync(f => f.FollowerId == userId && f.FolloweeId == dto.FolloweeId);
+            var exist = await _unitOfWork.Followings.GetFollowing(userId, dto.FolloweeId) != null;
 
             if(exist)
             {
-                return BadRequest("Followinf already exist");
+                return BadRequest("Following already exist");
             }
 
             var following = new Following
@@ -35,8 +34,8 @@ namespace GigHub.Controllers.Api
                 FollowerId = dto.FolloweeId
             };
 
-            _context.Followings.Add(following);
-            await _context.SaveChangesAsync();
+            _unitOfWork.Followings.Add(following);
+            await _unitOfWork.Complete();
             return Ok();
         }
 
@@ -45,14 +44,13 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var follow = await _context.Followings
-                .SingleOrDefaultAsync(f => f.FollowerId == userId && f.FolloweeId == id);
+            var follow = await _unitOfWork.Followings.GetFollowing(userId, id);
 
             if(follow == null)
                 return NotFound();
 
-            _context.Followings.Remove(follow);
-            await _context.SaveChangesAsync();
+            _unitOfWork.Followings.Remove(follow);
+            await _unitOfWork.Complete();
 
             return Ok(id);
         }

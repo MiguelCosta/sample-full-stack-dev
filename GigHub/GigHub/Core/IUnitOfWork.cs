@@ -13,6 +13,8 @@ namespace GigHub.Core
 
         IGigRepository Gigs { get; }
 
+        INotificationRepository Notifications { get; }
+
         Task Complete();
     }
 }

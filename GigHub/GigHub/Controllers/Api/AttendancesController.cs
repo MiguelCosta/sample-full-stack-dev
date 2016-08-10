@@ -1,4 +1,5 @@
-﻿using GigHub.Core.Dtos;
+﻿using GigHub.Core;
+using GigHub.Core.Dtos;
 using GigHub.Core.Models;
 using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
@@ -11,11 +12,11 @@ namespace GigHub.Controllers.Api
     [Authorize]
     public class AttendancesController : ApiController
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public AttendancesController()
+        public AttendancesController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -23,8 +24,7 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var exist = await _context.Attendances
-                            .AnyAsync(a => a.AttendeeId == userId && a.GigId == dto.GigId);
+            var exist = await _unitOfWork.Attendances.GetAttendance(dto.GigId, userId) != null;
 
             if(exist)
             {
@@ -36,8 +36,9 @@ namespace GigHub.Controllers.Api
                 GigId = dto.GigId,
                 AttendeeId = userId
             };
-            _context.Attendances.Add(attendance);
-            await _context.SaveChangesAsync();
+
+            _unitOfWork.Attendances.Add(attendance);
+            await _unitOfWork.Complete();
             return Ok();
         }
 
@@ -46,14 +47,13 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var attendance = await _context.Attendances
-                .SingleOrDefaultAsync(a => a.AttendeeId == userId && a.GigId == id);
+            var attendance = await _unitOfWork.Attendances.GetAttendance(id, userId);
 
             if(attendance == null)
                 return NotFound();
 
-            _context.Attendances.Remove(attendance);
-            await _context.SaveChangesAsync();
+            _unitOfWork.Attendances.Remove(attendance);
+            await _unitOfWork.Complete();
 
             return Ok(id);
         }

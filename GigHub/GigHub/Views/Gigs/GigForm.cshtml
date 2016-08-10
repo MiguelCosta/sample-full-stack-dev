@@ -1,4 +1,4 @@
-﻿@model GigHub.ViewModels.GigFormViewModel
+﻿@model GigHub.Core.ViewModels.GigFormViewModel
 
 @{
     ViewBag.Title = Model.Heading;
@@ -30,8 +30,8 @@
         @Html.LabelFor(m => m.Genre)
         @Html.DropDownListFor(m => m.Genre,
                                     new SelectList(Model.Genres,
-                                                    nameof(GigHub.Models.Genre.Id),
-                                                    nameof(GigHub.Models.Genre.Name)),
+                                                    nameof(GigHub.Core.Models.Genre.Id),
+                                                    nameof(GigHub.Core.Models.Genre.Name)),
                                     string.Empty, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Genre)
     </div>

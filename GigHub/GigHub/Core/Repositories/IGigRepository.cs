@@ -15,5 +15,7 @@ namespace GigHub.Core.Repositories
         Task<Gig> GetGigWithAttendances(int gigId);
 
         Task<IEnumerable<Gig>> GetUpcommingGigsByArtist(string userId);
+
+        Task<IEnumerable<Gig>> GetUpcommingGigs(string query);
     }
 }

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using GigHub.Core;
 using GigHub.Core.Dtos;
-using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -13,22 +12,17 @@ namespace GigHub.Controllers.Api
     [Authorize]
     public class NotificationsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public NotificationsController()
+        public NotificationsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IEnumerable<NotificationDto>> GetNewNotifications()
         {
             var user = User.Identity.GetUserId();
-            var notifications = await _context.UserNotifications
-                .Where(un => un.UserId == user && un.IsRead == false)
-                .Select(un => un.Notification)
-                .Include(n => n.Gig.Artist)
-                .Include(n => n.Gig.Genre)
-                .ToListAsync();
+            var notifications = await _unitOfWork.Notifications.GetNotificationsUnread(user);
 
             return notifications.Select(Mapper.Map<NotificationDto>);
             // same result
@@ -40,13 +34,11 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var notifications = await _context.UserNotifications
-                .Where(un => un.UserId == userId && un.IsRead == false)
-                .ToListAsync();
+            var notifications = await _unitOfWork.Notifications.GetUserNotificationsUnread(userId);
 
-            notifications.ForEach(n => n.Read());
+            notifications.ToList().ForEach(n => n.Read());
 
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             return Ok();
         }

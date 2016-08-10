@@ -2,6 +2,7 @@
 using GigHub.Core.Repositories;
 using GigHub.Persistence.Repositories;
 using System.Threading.Tasks;
+using System;
 
 namespace GigHub.Persistence
 {
@@ -26,6 +27,8 @@ namespace GigHub.Persistence
         public IGenreRepository Genres { get; private set; }
 
         public IGigRepository Gigs { get; private set; }
+
+        public INotificationRepository Notifications { get; private set; }
 
         public async Task Complete()
         {

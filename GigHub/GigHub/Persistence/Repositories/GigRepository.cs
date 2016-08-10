@@ -46,6 +46,26 @@ namespace GigHub.Persistence.Repositories
                 .SingleOrDefaultAsync(g => g.Id == gigId);
         }
 
+        public async Task<IEnumerable<Gig>> GetUpcommingGigs(string query)
+        {
+            var upcomingGigs = _context.Gigs
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
+                .Where(g => g.DateTime > DateTime.Now && g.IsCanceled == false);
+
+            if(string.IsNullOrWhiteSpace(query) == false)
+            {
+                upcomingGigs = upcomingGigs
+                    .Where(g =>
+                        g.Artist.Name.Contains(query)
+                        || g.Venue.Contains(query)
+                        || g.Genre.Name.Contains(query));
+            }
+
+            return await upcomingGigs.ToListAsync();
+
+        }
+
         public async Task<IEnumerable<Gig>> GetUpcommingGigsByArtist(string userId)
         {
             return await _context.Gigs

@@ -1,10 +1,6 @@
-﻿using GigHub.Core.Repositories;
+﻿using GigHub.Core;
 using GigHub.Core.ViewModels;
-using GigHub.Persistence;
-using GigHub.Persistence.Repositories;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -13,13 +9,11 @@ namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IAttendanceRepository _attendanceRepository;
-        private readonly ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public HomeController()
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-            _attendanceRepository = new AttendanceRepository(_context);
+            _unitOfWork = unitOfWork;
         }
 
         public ActionResult About()
@@ -38,28 +32,16 @@ namespace GigHub.Controllers
 
         public async Task<ActionResult> Index(string query = null)
         {
-            var upcomingGigs = _context.Gigs
-                .Include(g => g.Artist)
-                .Include(g => g.Genre)
-                .Where(g => g.DateTime > DateTime.Now && g.IsCanceled == false);
-
-            if(string.IsNullOrWhiteSpace(query) == false)
-            {
-                upcomingGigs = upcomingGigs
-                    .Where(g =>
-                        g.Artist.Name.Contains(query)
-                        || g.Venue.Contains(query)
-                        || g.Genre.Name.Contains(query));
-            }
+            var upcomingGigs = await _unitOfWork.Gigs.GetUpcommingGigs(query);
 
             var userId = User.Identity.GetUserId();
-            var attendances = (await _attendanceRepository.GetFutureAttendances(userId))
+            var attendances = (await _unitOfWork.Attendances.GetFutureAttendances(userId))
                 .ToLookup(a => a.GigId);
 
             var viewModel = new GigsViewModel
             {
                 ShowActions = User.Identity.IsAuthenticated,
-                Gigs = await upcomingGigs.ToListAsync(),
+                Gigs = upcomingGigs,
                 Heading = "Upcoming Gigs",
                 SearchTerm = query,
                 Attendances = attendances
