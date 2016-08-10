@@ -11,7 +11,6 @@ namespace GigHub.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Extensions.Conventions;
-    using Persistence;
 
     public static class NinjectWebCommon 
     {
@@ -49,13 +48,13 @@ namespace GigHub.App_Start
 
                 RegisterServices(kernel);
 
-                // use Ninject.Extentions.Convetions
-                kernel.Bind(x =>
-                {
-                    x.FromThisAssembly()
-                        .SelectAllClasses()
-                        .BindDefaultInterfaces();
-                });
+                // using Ninject.Extentions.Convetions
+                //kernel.Bind(x =>
+                //{
+                //    x.FromThisAssembly()
+                //        .SelectAllClasses()
+                //        .BindDefaultInterfaces();
+                //});
 
                 return kernel;
             }
@@ -73,7 +72,7 @@ namespace GigHub.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             // without Ninject.Extensions.Conventions
-            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<Core.IUnitOfWork>().To<Persistence.UnitOfWork>();
         }        
     }
 }
