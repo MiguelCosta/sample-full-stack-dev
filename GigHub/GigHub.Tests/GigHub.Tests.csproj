@@ -101,6 +101,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Controllers\Api\GigsControllerTests.cs" />
+    <Compile Include="Controllers\Api\AttendancesControllerTests.cs" />
     <Compile Include="Domain\Models\GigTests.cs" />
     <Compile Include="Domain\Models\NotificationTests.cs" />
     <Compile Include="Domain\Models\ApplicationUserTests.cs" />
