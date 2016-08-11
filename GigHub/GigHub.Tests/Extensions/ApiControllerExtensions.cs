@@ -15,11 +15,9 @@ namespace GigHub.Tests.Extensions
         {
             var identity = new GenericIdentity(username);
             identity.AddClaim(
-                new Claim("http://schemas.xmlsoap.org/ws/2015/05/identity/claims/name", username)
-                );
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", username));
             identity.AddClaim(
-                new Claim("http://schemas.xmlsoap.org/ws/2015/05/identity/claims/nameidentifier", userId)
-                );
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId));
 
             var principal = new GenericPrincipal(identity, null);
 
