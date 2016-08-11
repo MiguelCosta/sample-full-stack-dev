@@ -10,9 +10,9 @@ namespace GigHub.Persistence.Repositories
 {
     public class GigRepository : IGigRepository
     {
-        private ApplicationDbContext _context;
+        private IApplicationDbContext _context;
 
-        public GigRepository(ApplicationDbContext context)
+        public GigRepository(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,7 @@ namespace GigHub.Persistence.Repositories
             _context.Gigs.Add(gig);
         }
 
-        public async Task<Gig> GetGig(int id)
+        public async Task<Gig> GetGigAsync(int id)
         {
             return await _context.Gigs
                 .Include(g => g.Artist)
@@ -30,7 +30,7 @@ namespace GigHub.Persistence.Repositories
                 .SingleOrDefaultAsync(g => g.Id == id);
         }
 
-        public async Task<IEnumerable<Gig>> GetGigsUserAttending(string userId)
+        public async Task<IEnumerable<Gig>> GetGigsUserAttendingAsync(string userId)
         {
             return await _context.Attendances.Where(a => a.AttendeeId == userId)
                 .Select(a => a.Gig)
@@ -39,14 +39,14 @@ namespace GigHub.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Gig> GetGigWithAttendances(int gigId)
+        public async Task<Gig> GetGigWithAttendancesAsync(int gigId)
         {
             return await _context.Gigs
                 .Include(g => g.Attendances.Select(a => a.Attendee))
                 .SingleOrDefaultAsync(g => g.Id == gigId);
         }
 
-        public async Task<IEnumerable<Gig>> GetUpcommingGigs(string query)
+        public async Task<IEnumerable<Gig>> GetUpcommingGigsAsync(string query)
         {
             var upcomingGigs = _context.Gigs
                 .Include(g => g.Artist)
@@ -66,7 +66,7 @@ namespace GigHub.Persistence.Repositories
 
         }
 
-        public async Task<IEnumerable<Gig>> GetUpcommingGigsByArtist(string userId)
+        public async Task<IEnumerable<Gig>> GetUpcomingGigsByArtistAsync(string userId)
         {
             return await _context.Gigs
                 .Where(g => g.ArtistId == userId

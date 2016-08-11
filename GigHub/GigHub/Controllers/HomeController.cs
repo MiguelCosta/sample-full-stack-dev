@@ -32,7 +32,7 @@ namespace GigHub.Controllers
 
         public async Task<ActionResult> Index(string query = null)
         {
-            var upcomingGigs = await _unitOfWork.Gigs.GetUpcommingGigs(query);
+            var upcomingGigs = await _unitOfWork.Gigs.GetUpcommingGigsAsync(query);
 
             var userId = User.Identity.GetUserId();
             var attendances = (await _unitOfWork.Attendances.GetFutureAttendances(userId))

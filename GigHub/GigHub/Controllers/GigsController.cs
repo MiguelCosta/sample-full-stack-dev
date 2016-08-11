@@ -25,7 +25,7 @@ namespace GigHub.Controllers
             var viewModel = new GigsViewModel
             {
                 ShowActions = true,
-                Gigs = await _unitOfWork.Gigs.GetGigsUserAttending(userId),
+                Gigs = await _unitOfWork.Gigs.GetGigsUserAttendingAsync(userId),
                 Heading = "Gigs I'm attending",
                 Attendances = (await _unitOfWork.Attendances.GetFutureAttendances(userId)).ToLookup(a => a.GigId)
             };
@@ -70,7 +70,7 @@ namespace GigHub.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
-            var gig = await _unitOfWork.Gigs.GetGig(id);
+            var gig = await _unitOfWork.Gigs.GetGigAsync(id);
 
             if(gig == null)
                 return HttpNotFound();
@@ -99,7 +99,7 @@ namespace GigHub.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var gig = await _unitOfWork.Gigs.GetGig(id);
+            var gig = await _unitOfWork.Gigs.GetGigAsync(id);
 
             if(gig.ArtistId != userId)
                 return new HttpUnauthorizedResult();
@@ -121,7 +121,7 @@ namespace GigHub.Controllers
         public async Task<ActionResult> Mine()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = await _unitOfWork.Gigs.GetUpcommingGigsByArtist(userId);
+            var gigs = await _unitOfWork.Gigs.GetUpcomingGigsByArtistAsync(userId);
 
             return View(gigs);
         }
@@ -143,7 +143,7 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
-            var gig = await _unitOfWork.Gigs.GetGigWithAttendances(viewModel.Id);
+            var gig = await _unitOfWork.Gigs.GetGigWithAttendancesAsync(viewModel.Id);
 
             if(gig == null)
                 return HttpNotFound();

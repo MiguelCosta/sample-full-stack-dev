@@ -8,14 +8,14 @@ namespace GigHub.Core.Repositories
     {
         void Add(Gig gig);
 
-        Task<Gig> GetGig(int id);
+        Task<Gig> GetGigAsync(int id);
 
-        Task<IEnumerable<Gig>> GetGigsUserAttending(string userId);
+        Task<IEnumerable<Gig>> GetGigsUserAttendingAsync(string userId);
 
-        Task<Gig> GetGigWithAttendances(int gigId);
+        Task<Gig> GetGigWithAttendancesAsync(int gigId);
 
-        Task<IEnumerable<Gig>> GetUpcommingGigsByArtist(string userId);
+        Task<IEnumerable<Gig>> GetUpcomingGigsByArtistAsync(string userId);
 
-        Task<IEnumerable<Gig>> GetUpcommingGigs(string query);
+        Task<IEnumerable<Gig>> GetUpcommingGigsAsync(string query);
     }
 }

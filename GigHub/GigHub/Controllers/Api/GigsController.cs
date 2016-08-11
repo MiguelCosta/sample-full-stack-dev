@@ -19,7 +19,7 @@ namespace GigHub.Controllers.Api
         public async Task<IHttpActionResult> Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
-            var gig = await _unitOfWork.Gigs.GetGigWithAttendances(id);
+            var gig = await _unitOfWork.Gigs.GetGigWithAttendancesAsync(id);
 
             if(gig == null || gig.IsCanceled)
                 return NotFound();

@@ -22,7 +22,7 @@ namespace GigHub.Controllers.Api
         public async Task<IEnumerable<NotificationDto>> GetNewNotifications()
         {
             var user = User.Identity.GetUserId();
-            var notifications = await _unitOfWork.Notifications.GetNotificationsUnread(user);
+            var notifications = await _unitOfWork.Notifications.GetNotificationsUnreadAsync(user);
 
             return notifications.Select(Mapper.Map<NotificationDto>);
             // same result
@@ -34,7 +34,7 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var notifications = await _unitOfWork.Notifications.GetUserNotificationsUnread(userId);
+            var notifications = await _unitOfWork.Notifications.GetUserNotificationsUnreadAsync(userId);
 
             notifications.ToList().ForEach(n => n.Read());
 

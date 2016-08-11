@@ -8,9 +8,9 @@ namespace GigHub.Persistence.Repositories
 {
     public class GenreRepository : IGenreRepository
     {
-        private ApplicationDbContext _context;
+        private IApplicationDbContext _context;
 
-        public GenreRepository(ApplicationDbContext context)
+        public GenreRepository(IApplicationDbContext context)
         {
             _context = context;
         }

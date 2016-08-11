@@ -10,9 +10,9 @@ namespace GigHub.Persistence.Repositories
 {
     public class AttendanceRepository : IAttendanceRepository
     {
-        private ApplicationDbContext _context;
+        private IApplicationDbContext _context;
 
-        public AttendanceRepository(ApplicationDbContext context)
+        public AttendanceRepository(IApplicationDbContext context)
         {
             _context = context;
         }

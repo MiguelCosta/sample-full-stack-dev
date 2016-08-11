@@ -106,6 +106,12 @@
     <Compile Include="Domain\Models\NotificationTests.cs" />
     <Compile Include="Domain\Models\ApplicationUserTests.cs" />
     <Compile Include="Extensions\ApiControllerExtensions.cs" />
+    <Compile Include="Extensions\MockDbSetExtensions.cs" />
+    <Compile Include="Extensions\TestDbAsyncEnumerable.cs" />
+    <Compile Include="Extensions\TestDbAsyncEnumerator.cs" />
+    <Compile Include="Extensions\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="Persistence\Repositories\GigRepositoryTests.cs" />
+    <Compile Include="Persistence\Repositories\NotificationRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
