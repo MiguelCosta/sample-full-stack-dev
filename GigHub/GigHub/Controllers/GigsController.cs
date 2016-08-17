@@ -118,7 +118,7 @@ namespace GigHub.Controllers
         }
 
         [Authorize]
-        public async Task<ActionResult> Mine()
+        public async Task<ViewResult> Mine()
         {
             var userId = User.Identity.GetUserId();
             var gigs = await _unitOfWork.Gigs.GetUpcomingGigsByArtistAsync(userId);
